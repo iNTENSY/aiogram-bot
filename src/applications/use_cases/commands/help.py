@@ -19,11 +19,9 @@ class HandleHelpUseCase(Interactor[DefaultAiogramRequest, DefaultAiogramResponse
             "<b>Бот для чтения книг</b>\n\n"
             "Доступные команды:\n\n"
             "/books - Список всех книг, присутствующих для чтения.\n"
-            "/read {id:int} - Начать читать книгу под указанным ID.\n"
-            "/reading - Получить список книг, которые вы читаете.\n"
-            "/bookmarks - Получить список всех Ваших закладок в книге.\n"
             "/help - Справочный центр бота.\n\n"
-            "Чтобы сохранить закладку в книге - нажмите на кнопку с номером страницы.\n\n"
+            "Все книги были найдены в открытых источниках, поэтому бот не несет ответственность"
+            "за нарушение каких-либо запретов или законов.\n\n"
             "<b>Приятного чтения!</b>"
         )
         return DefaultAiogramResponse(message=content, state=None, keyboard=ReplyKeyboardRemove())

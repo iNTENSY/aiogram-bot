@@ -6,16 +6,18 @@ from dishka import Provider, Scope, provide
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine, async_sessionmaker, AsyncSession
 
 from src.applications.interfaces.logger import ILogger
-from src.applications.use_cases.books.all import GetAllBooksUseCase
+from src.applications.use_cases.books.all import GetLimitedBooksUseCase
 from src.applications.use_cases.books.get import GetBookUseCase
 from src.applications.use_cases.commands.help import HandleHelpUseCase
 from src.domain.books.repository import IBookRepository
 from src.infrastructure.persistence.repositories.books import BookRepositoryImp
+from src.infrastructure.services.internal.keyboards.factory import KeyboardCombiner
 from src.infrastructure.services.internal.logger.config import LoggerConfig
 from src.infrastructure.services.internal.logger.logger import LoggerImp
 from src.applications.interfaces.transaction_manager import ITransactionContextManager
 from src.applications.use_cases.commands.start import HandleStartUseCase
 from src.infrastructure.persistence.transactions import PostgreSQLTransactionContextManagerImp
+from src.infrastructure.settings.books import BooksSettings
 from src.infrastructure.settings.database import DatabaseConfig
 
 
@@ -81,7 +83,7 @@ class HandlersProvider(Provider):
 
     start_handler = provide(HandleStartUseCase)
     help_handler = provide(HandleHelpUseCase)
-    books_handler = provide(GetAllBooksUseCase)
+    books_handler = provide(GetLimitedBooksUseCase)
     get_book = provide(GetBookUseCase)
 
 
@@ -116,3 +118,13 @@ class LoggerProvider(Provider):
 class RepositoriesProvider(Provider):
     scope = Scope.REQUEST
     books = provide(BookRepositoryImp, provides=IBookRepository)
+
+
+class UtilityProvider(Provider):
+    @provide(scope=Scope.REQUEST, provides=KeyboardCombiner)
+    def provide_keyboard_combiner(self) -> KeyboardCombiner:
+        return KeyboardCombiner()
+
+    @provide(scope=Scope.APP, provides=BooksSettings)
+    def provide_books_settings(self) -> BooksSettings:
+        return BooksSettings(limit=2)

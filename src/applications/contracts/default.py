@@ -18,3 +18,12 @@ class DefaultAiogramResponse:
     message: str | None = None
     state: State | None = None
     keyboard: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | None = None
+
+
+@dataclass(frozen=True)
+class PaginationResponse:
+    page: int
+    message: str | None = None
+    state: State | None = None
+    keyboard: InlineKeyboardMarkup | ReplyKeyboardMarkup | ReplyKeyboardRemove | None = None
+

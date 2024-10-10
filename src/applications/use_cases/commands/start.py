@@ -16,7 +16,7 @@ class HandleStartUseCase(Interactor[DefaultAiogramRequest, DefaultAiogramRespons
 
         content = (
             "<b>Привет, читатель!</b>\n\n"
-            "Это бот, в котором ты можешь прочитать определенную книгу.\n\n"
+            "Это бот, в котором ты можешь скачать определенную книгу.\n\n"
             "Чтобы посмотреть список доступных команд - набери /help"
         )
         return DefaultAiogramResponse(message=content, state=None, keyboard=ReplyKeyboardRemove())

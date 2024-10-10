@@ -3,8 +3,7 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class GetBooksRequest:
-    offset: int
-    limit: int = 10
+    page: int = 1
 
 
 @dataclass(frozen=True)

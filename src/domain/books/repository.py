@@ -21,3 +21,6 @@ class IBookRepository(Protocol):
 
     async def get_last_id(self) -> int:
         raise NotImplementedError
+
+    async def count(self) -> int:
+        raise NotImplementedError

@@ -2,9 +2,8 @@ from aiogram.filters.callback_data import CallbackData
 
 
 class FinderBookCallbackFactory(CallbackData, prefix="finder"):
-    previous: bool = False
     cancel: bool = False
-    next: bool = False
+    page: int
 
 
 class BookIDCallbackFactory(CallbackData, prefix="book"):

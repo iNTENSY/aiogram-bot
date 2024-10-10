@@ -1,5 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.sql.functions import count
 
 from src.domain.books.entity import Book
 from src.domain.books.repository import IBookRepository
@@ -20,3 +21,8 @@ class BookRepositoryImp(IBookRepository):
         statement = select(BookModel).filter_by(**parameters)
         result = await self.__session.execute(statement)
         return [BookMapper.generate_to_entity(vars(book)) for book in result.scalars().all()]
+
+    async def count(self) -> int:
+        statement = select(count()).select_from(BookModel)
+        result = await self.__session.execute(statement)
+        return result.scalar_one()

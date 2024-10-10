@@ -5,7 +5,7 @@ from dishka.integrations.aiogram import setup_dishka
 from src.infrastructure.di.providers import (SQLAlchemyProvider,
                                              TransactionManagerProvider,
                                              HandlersProvider,
-                                             LoggerProvider, RepositoriesProvider)
+                                             LoggerProvider, RepositoriesProvider, UtilityProvider)
 
 
 def ioc_factory() -> AsyncContainer:
@@ -15,6 +15,7 @@ def ioc_factory() -> AsyncContainer:
         HandlersProvider(),
         LoggerProvider(),
         RepositoriesProvider(),
+        UtilityProvider()
     )
     return container
 
