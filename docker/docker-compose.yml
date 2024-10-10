@@ -1,0 +1,20 @@
+volumes:
+  pd_data:
+
+
+services:
+  db:
+    image: postgres:latest
+    env_file: .env
+    volumes:
+      - pd_data:/var/lib/postgresql/data/
+    restart: always
+
+  backend:
+    build: ../.
+    env_file: .env
+    restart: always
+    volumes:
+      - ./logs/:/aiogram/logs/
+    depends_on:
+      - db

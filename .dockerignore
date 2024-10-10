@@ -1,0 +1,12 @@
+.git
+README.md
+*ignore
+.DS_Store
+.idea
+*env
+.env.example
+__pycache__
+db.sqlite3
+Dockerfile
+.vscode
+docker
