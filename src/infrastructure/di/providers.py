@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine, async_sessi
 from src.applications.interfaces.logger import ILogger
 from src.applications.use_cases.books.all import GetLimitedBooksUseCase
 from src.applications.use_cases.books.get import GetBookUseCase
+from src.applications.use_cases.commands.contacts import HandleContactsUseCase
 from src.applications.use_cases.commands.help import HandleHelpUseCase
 from src.domain.books.repository import IBookRepository
 from src.infrastructure.persistence.repositories.books import BookRepositoryImp
@@ -83,6 +84,7 @@ class HandlersProvider(Provider):
 
     start_handler = provide(HandleStartUseCase)
     help_handler = provide(HandleHelpUseCase)
+    contacts_handler = provide(HandleContactsUseCase)
     books_handler = provide(GetLimitedBooksUseCase)
     get_book = provide(GetBookUseCase)
 
