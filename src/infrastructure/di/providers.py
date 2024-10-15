@@ -118,11 +118,29 @@ class LoggerProvider(Provider):
 
 
 class RepositoriesProvider(Provider):
+    """
+    Поставщик модулей использующих паттерн "Репозиторий", которые скрывают
+    обращения к базе данных путем предоставления простого интерфейса.
+
+    Scope: REQUEST
+
+    Providers:
+        - IBookRepository: Репозиторий к сущности "Книга"
+    """
     scope = Scope.REQUEST
     books = provide(BookRepositoryImp, provides=IBookRepository)
 
 
 class UtilityProvider(Provider):
+    """
+    Поставщик вспомогательных модулей
+
+    Scope: REQUEST
+
+    Providers:
+        - KeyboardCombiner: Фабрика клавиатуры (кнопок)
+        - BooksSettings: Дата-класс с параметрами для книг
+    """
     @provide(scope=Scope.REQUEST, provides=KeyboardCombiner)
     def provide_keyboard_combiner(self) -> KeyboardCombiner:
         return KeyboardCombiner()
